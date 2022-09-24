@@ -20,4 +20,12 @@ h2 {
     margin-right: auto;
 }
 
-h2 
+h2 span {
+    color: #FA9F42;
+    font-size: 0.75em;
+}
+
+#copyright {
+    padding: 12px;
+    font-size: 0.75em;
+}
