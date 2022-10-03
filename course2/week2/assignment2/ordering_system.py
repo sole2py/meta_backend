@@ -1,15 +1,16 @@
 menu = {
     1: {"name": 'espresso',
         "price": 1.99},
-    2: {"name": 'coffee', 
+    2: {"name": 'coffee',
         "price": 2.50},
-    3: {"name": 'cake', 
+    3: {"name": 'cake',
         "price": 2.79},
-    4: {"name": 'soup', 
+    4: {"name": 'soup',
         "price": 4.50},
     5: {"name": 'sandwich',
         "price": 4.99}
 }
+
 
 def calculate_subtotal(order):
     """ Calculates the subtotal of an order
@@ -24,9 +25,11 @@ def calculate_subtotal(order):
         float = The sum of the prices of the items in the order
     """
     print('Calculating bill subtotal...')
-    ### WRITE SOLUTION HERE
+    total = 0.0
+    for item in order:
+        total += item.get('price')
+    return total
 
-    raise NotImplementedError()
 
 def calculate_tax(subtotal):
     """ Calculates the tax of an order
@@ -41,9 +44,9 @@ def calculate_tax(subtotal):
         float - The tax required of a given subtotal, which is 15% rounded to two decimals.
     """
     print('Calculating tax from subtotal...')
-    ### WRITE SOLUTION HERE
+    return round(subtotal * 0.15, 2)
+    # raise NotImplementedError()
 
-    raise NotImplementedError()
 
 def summarize_order(order):
     """ Summarizes the order
@@ -64,8 +67,13 @@ def summarize_order(order):
     """
     print_order(order)
     ### WRITE SOLUTION HERE
+    total = 0.0
+    names = []
+    for item in order:
+        total += round(item.get('price') * 1.15, 2)
+        names.append(item.get('name'))
+    return names, round(total, 2)
 
-    raise NotImplementedError()
 
 # This function is provided for you, and will print out the items in an order
 def print_order(order):
@@ -75,12 +83,14 @@ def print_order(order):
     print(items)
     return order
 
+
 # This function is provided for you, and will display the menu
 def display_menu():
     print("------- Menu -------")
     for selection in menu:
         print(f"{selection}. {menu[selection]['name'] : <9} | {menu[selection]['price'] : >5}")
     print()
+
 
 # This function is provided for you, and will create an order by prompting the user to select menu items
 def take_order():
@@ -93,21 +103,25 @@ def take_order():
         order.append(menu[int(item)])
     return order
 
+
 '''
 Here are some sample function calls to help you test your implementations.
 Feel free to change, uncomment, and add these as you wish.
 '''
+
+
 def main():
     order = take_order()
     print_order(order)
 
-    # subtotal = calculate_subtotal(order)
-    # print("Subtotal for the order is: " + str(subtotal))
+    subtotal = calculate_subtotal(order)
+    print("Subtotal for the order is: " + str(subtotal))
 
-    # tax = calculate_tax(subtotal)
-    # print("Tax for the order is: " + str(tax))
+    tax = calculate_tax(subtotal)
+    print("Tax for the order is: " + str(tax))
 
-    # items, subtotal = summarize_order(order)
+    items, subtotal = summarize_order(order)
+
 
 if __name__ == "__main__":
     main()
